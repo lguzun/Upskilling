@@ -1,5 +1,6 @@
 Feature: User Registration
 
+
   Scenario Outline: Register a new user with valid details
     Given User is on the registration page
     When User submits the registration form with the following details
@@ -18,7 +19,7 @@ Feature: User Registration
 
     Examples:
       | firstName | lastName | address | city | state | zipcode | phone  | SSN   | username | password  | confirm   |
-      | user2     | user11  | RM      | NY   | NY    | 2023    | 123456 | 98765 | user4   | user1pass | user1pass |
+      | user2     | user11  | RM      | NY   | NY    | 2023    | 123456 | 98765 | user10   | user1pass | user1pass |
 
 
 
