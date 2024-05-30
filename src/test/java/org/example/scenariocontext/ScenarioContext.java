@@ -1,24 +1,30 @@
 package org.example.scenariocontext;
 
+import enums.Context;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class ScenarioContext {
-    private Map<String, String> context;
+    private static ScenarioContext instance;
+    private Map<String, Object> scenarioContext;
 
-    public ScenarioContext() {
-        context = new HashMap<>();
+    private ScenarioContext(){
+        scenarioContext = new HashMap<String, Object>();
     }
 
-    //TODO String value -> Object value from Study Materails, to read Generics
-
-    public void setContext(String key, String value) {
-        context.put(key, value);
-       // System.out.println("SetContext  ....... key: "+ key + " and value: " + value);
+    public static ScenarioContext getInstance() {
+        if (instance == null) {
+            instance = new ScenarioContext();
+        }
+        return instance;
     }
 
-    public String getContext(String key) {
-       // System.out.println("GetContext  ....... key " + key);
-        return context.get(key);
+    public void setContext(Context key, Object value) {
+        scenarioContext.put(key.toString(), value);
+    }
+
+    public Object getContext(Context key){
+        return scenarioContext.get(key.toString());
     }
 }

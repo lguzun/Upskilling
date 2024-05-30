@@ -1,7 +1,5 @@
 package org.example.dataproviders;
 
-import org.example.enums.DriverType;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -48,18 +46,18 @@ public class ConfigFileReader {
         else throw new RuntimeException("url not specified in the Config.properties file.");
     }
 
-//TODO make a SWITCH
-    public DriverType getBrowser() {
-        String browserName = properties.getProperty("browser");
-        if(browserName == null || browserName.equals("chrome")) return DriverType.CHROME;
-        else if(browserName.equalsIgnoreCase("firefox")) return DriverType.FIREFOX;
-        else if(browserName.equals("edge")) return DriverType.MICROSOFTEDGE;
-        else throw new RuntimeException("Browser Name Key value in Configuration.properties is not matched : " + browserName);
+    public String getProperty(String key) {
+        String value = properties.getProperty(key);
+        if (value == null) {
+            throw new IllegalArgumentException("There is no value for key:" + key);
+        }
+        return value;
     }
+
 
     public Boolean getBrowserWindowSize() {
         String windowSize = properties.getProperty("windowMaximize");
-        if(windowSize != null) return Boolean.valueOf(windowSize);
+        if (windowSize != null) return Boolean.valueOf(windowSize);
         return true;
     }
 }

@@ -6,17 +6,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
+    private WebDriver driver;
 
-    private static WebDriver driver;
-    //public WebDriver driver = WebDriver.getInstance();
-    // ConfigFileReader configFileReader;
 
-    // Constructor
+    // Constructor OK!!!!
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+       // this.driver = driver;
         PageFactory.initElements(driver, this);
-       // configFileReader= new ConfigFileReader();
     }
+
 
 
     // Web Elements using @FindBy annotation

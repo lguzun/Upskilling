@@ -1,6 +1,7 @@
 package org.example.managers;
 
-import org.example.enums.DriverType;
+import org.example.dataproviders.ConfigFileReader;
+import org.example.scenariocontext.ScenarioContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -10,56 +11,54 @@ import java.util.concurrent.TimeUnit;
 
 
 public class WebDriverManager {
-    private WebDriver driver;
-    private DriverType driverType;
-    private static final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver";
+    private static WebDriver driver;
+    private static ConfigFileReader configFileReader = new ConfigFileReader();
+    ;
+    private ScenarioContext scenarioContext = ScenarioContext.getInstance();
 
-    public WebDriverManager() {
-        driverType = FileReaderManager.getInstance().getConfigReader().getBrowser();
+
+    public String getCurURL() {
+        return driver.getCurrentUrl();
     }
 
-    public WebDriver getDriver() {
-        if (driver == null) driver = createDriver();
+    public static WebDriver getDriver() {
+        if (driver == null) {
+            createDriver();
+        }
         return driver;
     }
 
-//    private WebDriver createDriver() {
-//        driver = createDriver();
-//        return driver;
-//    }
-
-
-    private WebDriver createDriver() {
-        switch (driverType) {
-            case FIREFOX:
-                driver = new FirefoxDriver();
-                break;
-            case CHROME:
-              //  System.setProperty(CHROME_DRIVER_PROPERTY, FileReaderManager.getInstance().getConfigReader().getDriverPath());
+    private static void createDriver() {
+        String browserType = configFileReader.getProperty("browser");
+        switch (browserType.toUpperCase()) {
+            case "CHROME":
                 driver = new ChromeDriver();
-               break;
-            case MICROSOFTEDGE:
-                driver = new EdgeDriver();
                 break;
+            case "FIREFOX":
+                driver = new FirefoxDriver();
+                System.out.println("The Firefox browser is initiated");
+                break;
+            case "MICROSOFTEDGE":
+                driver = new EdgeDriver();
+                System.out.println("The Edge browser is initiated");
+                break;
+            default:
+                throw new RuntimeException("The web driver type " + browserType + " is not defined");
         }
 
-       if (FileReaderManager.getInstance().getConfigReader().getBrowserWindowSize())
+        if (configFileReader.getBrowserWindowSize()) {
             driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(FileReaderManager.getInstance().getConfigReader().getImplicitlyWait(), TimeUnit.SECONDS);
+        }
+        driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
+    }
+//
 
-        return driver;
+    public static void closeDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
     }
 
-    public void closeDriver() {
-        driver.close();
-        driver.quit();
-    }
 
-
-//    public void quitDriver() {
-//        if (driver != null) {
-//            driver.quit();
-//            driver = null;
-//        }
-//    }
 }

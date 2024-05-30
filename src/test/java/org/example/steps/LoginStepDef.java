@@ -1,47 +1,42 @@
 package org.example.steps;
 
-import org.example.scenariocontext.ScenarioContext;
-import org.example.dataproviders.ConfigFileReader;
+import enums.Context;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.example.managers.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.pages.LoginPage;
+import org.example.scenariocontext.ScenarioContext;
 import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
+
 public class LoginStepDef {
 
-    private ScenarioContext scenarioContext = new ScenarioContext();
-   // public LoginStepDef(){}
+    private WebDriver driver;
+    private LoginPage loginPage;
+//
+    private ScenarioContext scenarioContext = ScenarioContext.getInstance();
+    private static final Logger LOGGER = LogManager.getLogger(LoginStepDef.class);
 
-    //TODO to move webdriver to ScenarioContext
-    WebDriverManager webDriverManager = new WebDriverManager();
-    WebDriver driver = webDriverManager.getDriver();
+    public LoginStepDef() {
 
-    //ConfigFileReader configFileReader;
-    private static final Logger logger = LogManager.getLogger(LoginStepDef.class);
+    }
 
     @Given("User is on Home Page")
     public void userIsOnHomePage() {
-        ConfigFileReader configFileReader= new ConfigFileReader();
-        System.setProperty("webdriver.chrome.driver", configFileReader.getDriverPath());
-        driver.get(configFileReader.getApplicationUrl());
-        //TODO move to Hooks
-        logger.info("User is on Login page: " + driver.getCurrentUrl());
+
+        LOGGER.info("User is on Login page: ");
     }
 
     @When("User Navigates to LogIn Page")
     public void userNavigatesToLogInPage() {
-        // Instantiate the LoginPage object
-      //TODO de scos din steps in clasa direct
-        //TODO de ster System.SET.Propertu chrome.exe
+        WebDriver driver = (WebDriver) scenarioContext.getContext(enums.Context.WEB_DRIVER);
         LoginPage loginPage = new LoginPage(driver);
     }
 
@@ -50,19 +45,21 @@ public class LoginStepDef {
         LoginPage.enterUsername(username);
         LoginPage.enterPassword(password);
         LoginPage.clickLoginButton();
-        scenarioContext.setContext("username", username);
-        scenarioContext.setContext("password", password);
-        logger.info("User logged with: " + username + password);
+        scenarioContext.setContext(enums.Context.USER_NAME, username);
+        scenarioContext.setContext(enums.Context.PASSWORD, password);
+        //scenarioContext.setContext(Context.PRODUCT_TITLE, productsPage.getProductTitleByIndex(0));
+        LOGGER.info("User logged with: " + username + password);
     }
-//TODO to change assert only in Then
+
+    //TODO to change assert only in Then
     @Then("user should be logged in successfully")
     public void userLoggedInSuccessfully() {
-        // Assuming you have a page object instantiated as 'registrationPage'
+        WebDriver driver = (WebDriver) scenarioContext.getContext(Context.WEB_DRIVER);
         LoginPage loginPage = new LoginPage(driver);
         assertTrue(loginPage.isSuccessMessageDisplayed());
-        logger.info("Login message: "+loginPage.getSuccessMessage());
-        String username = scenarioContext.getContext("username");
-        String password = scenarioContext.getContext("password");
+        LOGGER.info("Login message: " + loginPage.getSuccessMessage());
+        Object username = scenarioContext.getContext(Context.USER_NAME);
+        Object password = scenarioContext.getContext(Context.PASSWORD);
         assertEquals("user10", username);
         assertEquals("user1pass", password);
 
