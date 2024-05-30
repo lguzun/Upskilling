@@ -1,7 +1,7 @@
 Feature: Login Action
 
   @UI1
-  Scenario: Successful Login with Valid Credentials
+  Scenario Outline: Successful Login with Valid Credentials
     Given User is on Home Page
     When User Navigates to LogIn Page
     And user enters "<username>" and "<password>"
