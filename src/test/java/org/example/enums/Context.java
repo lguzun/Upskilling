@@ -6,7 +6,7 @@
 //}
 
 
-package org.example.enums;
+package enums;
 
 public enum Context {
     WEB_DRIVER, //TODO de scos na fig
