@@ -1,4 +1,4 @@
-package org.example.enums;
+package enums;
 
 public enum DriverType {
     FIREFOX,
