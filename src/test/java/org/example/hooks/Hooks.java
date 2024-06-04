@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 public class Hooks {
     private static ConfigFileReader configFileReader = new ConfigFileReader();;
     private final String homeUrl = configFileReader.getApplicationUrl() ;
+    //ScenarioContext scenarioContext = ScenarioContext.getInstance();
 
 
     @Before

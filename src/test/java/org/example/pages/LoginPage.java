@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import org.example.managers.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,13 +10,10 @@ public class LoginPage {
     private WebDriver driver;
 
 
-    // Constructor OK!!!!
     public LoginPage(WebDriver driver) {
-       // this.driver = driver;
-        PageFactory.initElements(driver, this);
+      this.driver = WebDriverManager.getDriver();
+       PageFactory.initElements(driver, this);
     }
-
-
 
     // Web Elements using @FindBy annotation
     @FindBy(xpath = "//input[@name='username']")
@@ -28,10 +26,6 @@ public class LoginPage {
     @FindBy(className=("login"))
     private static WebElement loginButton;
 
-//     globalDriver.findElement(By.className("login")).click();
-//        globalDriver.findElement(By.className("login")).submit();
-
-    // Actions performed on the page
     public static void enterUsername(String username) {
         usernameInput.sendKeys(username);
     }
@@ -58,7 +52,10 @@ public class LoginPage {
 
     //Find Success Login message element
     @FindBy(xpath = "//h1[text()='Accounts Overview']")
+//h1[normalize-space()='Accounts Overview']
+    //@FindBy(id = "accountTable")
     private WebElement successMessage;
+
 
     // Method to check if success message is displayed
     public boolean isSuccessMessageDisplayed() {
@@ -71,6 +68,14 @@ public class LoginPage {
     public String getSuccessMessage() {
         return successMessage.getText();
     }
+
+//    //Assert for Login
+//    String actualUrl = WebDriverManager.getDriver().getCurrentUrl();
+//    public boolean overviewPageIsDisplayed(){
+//       return actualUrl.contains("overview");
+//    }
+//  assertTrue("User is redirected to the page", actualUrl.contains("overview"));
+
 }
 
 

@@ -7,8 +7,10 @@ import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.dataproviders.ConfigFileReader;
+import org.example.managers.WebDriverManager;
 import org.example.pages.RegisterPage;
 import org.example.scenariocontext.ScenarioContext;
+import org.openqa.selenium.WebDriver;
 
 import java.util.Map;
 
@@ -17,15 +19,15 @@ import static org.junit.Assert.assertTrue;
 
 public class RegisterStepDef {
 
-    //    public WebDriver driver = new ChromeDriver();
-    //TODO to move to Hooks
-    //private ScenarioContext scenarioContext = new ScenarioContext();
+    private WebDriver driver;
+    private RegisterPage registerPage;
+    private ScenarioContext scenarioContext = ScenarioContext.getInstance();
+    private static final Logger LOGGER = LogManager.getLogger(LoginStepDef.class);
 
-    ScenarioContext scenarioContext = ScenarioContext.getInstance();
 
     public RegisterStepDef() {
+        this.driver = WebDriverManager.getDriver();
     }
-
     ;
 //   public RegisterStepDef(ScenarioContext scenarioContext) {
 //        this.scenarioContext = scenarioContext;
@@ -46,7 +48,7 @@ public class RegisterStepDef {
         ConfigFileReader configFileReader = new ConfigFileReader();
 
 //        driver.get(configFileReader.getApplicationUrl());
-        RegisterPage registerPage = new RegisterPage();
+        registerPage = new RegisterPage();
         registerPage.clickRegisterLink();
 //        logger.info("Register page is displayed: " + driver.getCurrentUrl());
     }
