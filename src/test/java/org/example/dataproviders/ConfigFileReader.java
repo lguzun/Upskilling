@@ -40,6 +40,7 @@ public class ConfigFileReader {
         else throw new RuntimeException("implicitlyWait not specified in the Config.properties file.");
     }
 
+
     public String getApplicationUrl() {
         String url = properties.getProperty("url");
         if (url != null) return url;
