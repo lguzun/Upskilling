@@ -1,6 +1,6 @@
 Feature: Login Action
 
-  @UI1
+@UI
   Scenario Outline: Successful Login with Valid Credentials
     Given User is on Home Page
     When User Navigates to LogIn Page
@@ -8,9 +8,9 @@ Feature: Login Action
     Then user should be logged in successfully
     Examples:
       | username | password  |
-      | user1   | user1pass |
+      | user6   | user1pass |
 
-# Scenario: Successful LogOut
+#Scenario: Successful LogOut
 #When User LogOut from the Application
-# hen Message displayed LogOut Successfully
+#Then hen Message displayed LogOut Successfully
 

@@ -2,8 +2,8 @@ package org.example.hooks;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.example.dataproviders.ConfigFileReader;
-import org.example.managers.WebDriverManager;
+import org.example.ui.managers.ConfigFileReader;
+import org.example.ui.managers.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 
 
@@ -13,7 +13,7 @@ public class Hooks {
     //ScenarioContext scenarioContext = ScenarioContext.getInstance();
 
 
-    @Before
+    @Before ("UI")
     public void setUp() {
         System.out.println("I was in hooks @before");
         WebDriver driver = WebDriverManager.getDriver();
@@ -21,7 +21,7 @@ public class Hooks {
         System.out.println("I was in hooks @before");
     }
 
-   @After
+   @After("UI")
     public void tearDown() {
        WebDriverManager.closeDriver();
     }

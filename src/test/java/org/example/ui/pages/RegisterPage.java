@@ -1,23 +1,21 @@
-package org.example.pages;
+package org.example.ui.pages;
 
-import enums.Context;
-import org.example.scenariocontext.ScenarioContext;
+import org.example.ui.managers.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.Map;
 
-
-
-
-
 public class RegisterPage {
-    static ScenarioContext scenarioContext = ScenarioContext.getInstance();
-    static WebDriver driver = (WebDriver) scenarioContext.getContext(Context.WEB_DRIVER);
+    static WebDriver driver;
 
-
+    public RegisterPage(WebDriver driver) {
+        this.driver = WebDriverManager.getDriver();
+        PageFactory.initElements(driver, this);
+    }
 
 
 //    private static WebDriver driver;

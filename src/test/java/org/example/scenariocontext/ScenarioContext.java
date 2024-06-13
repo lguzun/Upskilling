@@ -1,6 +1,6 @@
 package org.example.scenariocontext;
 
-import enums.Context;
+import org.example.enums.Context;
 
 import java.util.HashMap;
 import java.util.Map;
