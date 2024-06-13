@@ -1,4 +1,4 @@
-package org.example.utils;
+package org.example.ui.utils;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

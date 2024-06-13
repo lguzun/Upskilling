@@ -1,30 +1,31 @@
-package org.example.steps;
+package org.example.ui.steps;
 
-import enums.Context;
+import org.example.enums.Context;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.example.managers.WebDriverManager;
-import org.example.pages.LoginPage;
+import org.example.ui.managers.WebDriverManager;
+import org.example.ui.pages.LoginPage;
 import org.example.scenariocontext.ScenarioContext;
+import org.example.ui.utils.ScreenshotUtils;
 import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class LoginStepDef {
+public class UILoginStepDef {
 
     private WebDriver driver;
     private LoginPage loginPage;
 //
     private ScenarioContext scenarioContext = ScenarioContext.getInstance();
-    private static final Logger LOGGER = LogManager.getLogger(LoginStepDef.class);
+    private static final Logger LOGGER = LogManager.getLogger(UILoginStepDef.class);
 
-    public LoginStepDef() {
+    public UILoginStepDef() {
         this.driver = WebDriverManager.getDriver();
 
     }
@@ -37,7 +38,7 @@ public class LoginStepDef {
 
     @When("User Navigates to LogIn Page")
     public void userNavigatesToLogInPage() {
-        //WebDriver driver = (WebDriver) scenarioContext.getContext(enums.Context.WEB_DRIVER);
+        //WebDriver driver = (WebDriver) scenarioContext.getContext(org.example.enums.Context.WEB_DRIVER);
         LOGGER.info("User navigates to Login page: ");
        // LoginPage loginPage = new LoginPage(driver);
 
@@ -49,8 +50,8 @@ public class LoginStepDef {
         LoginPage.enterUsername(username);
         LoginPage.enterPassword(password);
         LoginPage.clickLoginButton();
-        scenarioContext.setContext(enums.Context.USER_NAME, username);
-        scenarioContext.setContext(enums.Context.PASSWORD, password);
+        scenarioContext.setContext(Context.USER_NAME, username);
+        scenarioContext.setContext(Context.PASSWORD, password);
         //scenarioContext.setContext(Context.PRODUCT_TITLE, productsPage.getProductTitleByIndex(0));
         LOGGER.info("User logged with: " + username + password);
     }
@@ -67,10 +68,14 @@ public class LoginStepDef {
         Object password = scenarioContext.getContext(Context.PASSWORD);
         assertEquals("user1", username);
         assertEquals("user1pass", password);
+        ScreenshotUtils.captureScreenshot(driver, "User LogIn Success");
+
 
 
 
     }
+
+
 }
 
 

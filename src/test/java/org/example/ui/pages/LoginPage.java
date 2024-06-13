@@ -1,6 +1,6 @@
-package org.example.pages;
+package org.example.ui.pages;
 
-import org.example.managers.WebDriverManager;
+import org.example.ui.managers.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -52,7 +52,7 @@ public class LoginPage {
 
     //Find Success Login message element
     @FindBy(xpath = "//h1[text()='Accounts Overview']")
-//h1[normalize-space()='Accounts Overview']
+   // @FindBy(xpath = "h1[normalize-space()='Accounts Overview']")
     //@FindBy(id = "accountTable")
     private WebElement successMessage;
 

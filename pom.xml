@@ -12,17 +12,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <selenium.version>4.20.0</selenium.version>
+    <cucumber.version>7.17.0</cucumber.version>
+    <io.rest.assured.version>4.4.0</io.rest.assured.version>
+    <jackson.version>2.12.3</jackson.version>
   </properties>
 
   <dependencies>
-    <!--  <dependency>
-       <groupId>junit</groupId>
-       <artifactId>junit</artifactId>
-       <version>4.13.2</version>
-       <scope>test</scope>
-     </dependency> -->
-
-     <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+  <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
@@ -33,14 +29,13 @@
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-java</artifactId>
-      <version>7.17.0</version>
+      <version>${cucumber.version}</version>
     </dependency>
 
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-junit</artifactId>
-      <version>7.17.0</version>
-      <scope>test</scope>
+      <version>${cucumber.version}</version>
     </dependency>
 
     <dependency>
@@ -63,7 +58,6 @@
       <version>2.23.1</version>
     </dependency>
 
-
     <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -76,43 +70,103 @@
       <groupId>info.cukes</groupId>
       <artifactId>cucumber-picocontainer</artifactId>
       <version>1.2.5</version>
-      <scope>test</scope>
+    </dependency>
+
+
+    <!-- Rest Assured dependencies -->
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>${io.rest.assured.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>json-path</artifactId>
+      <version>${io.rest.assured.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>xml-path</artifactId>
+      <version>${io.rest.assured.version}</version>
+    </dependency>
+
+    <!-- JUnit dependency -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+    </dependency>
+
+    <!-- Jackson Databind for JSON serialization/deserialization -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+
+    <!-- Jackson Dataformat for handling XML -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-xml</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
 
       <dependency>
           <groupId>org.junit.jupiter</groupId>
           <artifactId>junit-jupiter-api</artifactId>
           <version>5.10.2</version>
-          <scope>test</scope>
       </dependency>
 
-<!--    <dependency>-->
-<!--      <groupId>org.seleniumhq.selenium</groupId>-->
-<!--      <artifactId>selenium-chrome-driver</artifactId>-->
-<!--      <version>${selenium.version}</version>-->
-<!--    </dependency>-->
 
-<!--    &lt;!&ndash; https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver &ndash;&gt;-->
-<!--    <dependency>-->
-<!--      <groupId>org.seleniumhq.selenium</groupId>-->
-<!--      <artifactId>selenium-firefox-driver</artifactId>-->
-<!--      <version>${selenium.version}</version>-->
-<!--    </dependency>-->
+    <!-- https://mvnrepository.com/artifact/com.jayway.restassured/rest-assured -->
+    <dependency>
+      <groupId>com.jayway.restassured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>2.9.0</version>
+    </dependency>
 
-<!--    &lt;!&ndash; https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-safari-driver &ndash;&gt;-->
-<!--    <dependency>-->
-<!--      <groupId>org.seleniumhq.selenium</groupId>-->
-<!--      <artifactId>selenium-safari-driver</artifactId>-->
-<!--      <version>${selenium.version}</version>-->
-<!--    </dependency>-->
+    <!-- https://mvnrepository.com/artifact/org.hamcrest/java-hamcrest -->
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>java-hamcrest</artifactId>
+      <version>2.0.0.0</version>
+    </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-edge-driver -->
-<!--    <dependency>-->
-<!--      <groupId>org.seleniumhq.selenium</groupId>-->
-<!--      <artifactId>selenium-edge-driver</artifactId>-->
-<!--      <version>${selenium.version}</version>-->
-<!--    </dependency>-->
+    <!-- SLF4J and Logback dependencies -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.32</version>
+    </dependency>
 
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.6</version>
+    </dependency>
+
+    <!-- library provides the necessary dependencies for running Cucumber JVM. -->
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-jvm-deps</artifactId>
+      <version>1.0.6</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+      <version>1.3.2</version>
+    </dependency>
+
+    <!-- jackson-databind library for Serialization used by RestAssured library -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.17.1</version>
+    </dependency>
 
 
   </dependencies>

@@ -1,6 +1,5 @@
-package org.example.managers;
+package org.example.ui.managers;
 
-import org.example.dataproviders.ConfigFileReader;
 import org.example.scenariocontext.ScenarioContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

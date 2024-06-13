@@ -1,4 +1,4 @@
-package org.example.dataproviders;
+package org.example.ui.managers;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
